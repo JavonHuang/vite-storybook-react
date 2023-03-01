@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import "./../style/function.scss";
 @import "./../style/globalVar.scss";
 
 .#{$prefix}-row {
@@ -8,4 +7,15 @@
   position: relative;
   box-sizing: border-box;
   margin-bottom: 20px;
+  @each $var in (start, end, center, space-around, space-between) {
+    &.is-#{$var}{
+      justify-content: $var;
+    }
+  }
+
+  @each $key, $value in (top: flex-start, middle: center, bottom: flex-end) {
+    &.is-#{$key}{
+      align-items: $value;
+    }
+  }
 }

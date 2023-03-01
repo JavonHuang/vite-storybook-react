@@ -1,0 +1,17 @@
+@charset "UTF-8";
+@import "./../style/globalVar.scss";
+
+.#{$prefix}-row {
+  min-height: 60px;
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.#{$prefix}-col div{
+  border-radius: 4px;
+  background: #d3dce6;
+}
+
+.#{$prefix}-col-light div{
+  border-radius: 4px;
+  background: #e5e9f2;
+}

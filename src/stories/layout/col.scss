@@ -1,0 +1,7 @@
+@charset "UTF-8";
+@import "./../style/function.scss";
+@import "./../style/globalVar.scss";
+
+[class*=#{$prefix}-col-] {
+  box-sizing: border-box;
+}

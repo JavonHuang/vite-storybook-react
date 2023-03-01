@@ -1,0 +1,4 @@
+$white:#FFFFFF;
+@function brandColorMix($color,$percent) {
+  @return mix($white, $color, $percent)
+}

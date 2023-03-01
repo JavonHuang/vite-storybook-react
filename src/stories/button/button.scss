@@ -1,63 +1,92 @@
-// .storybook-button {
-//   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-//   font-weight: 700;
-//   border: 0;
-//   border-radius: 3em;
-//   cursor: pointer;
-//   display: inline-block;
-//   line-height: 1;
-// }
-// .storybook-button--primary {
-//   color: white;
-//   background-color: #1ea7fd;
-// }
-// .storybook-button--secondary {
-//   color: #333;
-//   background-color: transparent;
-//   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-// }
-// .storybook-button--small {
-//   font-size: 12px;
-//   padding: 10px 16px;
-// }
-// .storybook-button--medium {
-//   font-size: 14px;
-//   padding: 11px 20px;
-// }
-// .storybook-button--large {
-//   font-size: 16px;
-//   padding: 12px 24px;
-// }
+@charset "UTF-8";
+@import "./../style/function.scss";
+@import "./../style/globalVar.scss";
+
+@mixin active($color){
+  background:brandColorMix($color,20%);
+  border-color:brandColorMix($color,20%);
+  color: #fff;
+  outline: none;
+}
+
+@mixin plain($color){
+  color:brandColorMix($color,10%);
+  background:brandColorMix($color,90%);
+  border-color:brandColorMix($color,60%);
+}
 
 
-
-.button-ripple {
-  overflow: hidden;
-  position: relative;
-  transition: background-color 0.3s linear, border 0.3s linear;
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(
-      circle,
-      #000 10%,
-      rgba(0, 0, 0, 0) 10.01%
-    );
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10);
-    opacity: 0;
-    transition: transform 0.5s, opacity 1s;
+.#{$prefix}-button {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #dcdfe6;
+  border-color: #dcdfe6;
+  color: #606266;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  transition: .1s;
+  font-weight: 500;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  &+&{
+    margin-left: 10px;
   }
-  &:active:after {
-    transform: scale(0);
-    opacity: 0.2;
-    transition: 0s;
+  &:not(.is-disabled):active {
+    @include active($primary)
+  }
+  &.is-disabled{
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  @each $var in (round,circle) {
+    $parm:20px;
+    @if $var == round {
+      $parm:20px;
+    }
+    @if $var == circle {
+      $parm: 50%;
+    }
+    &.is-#{$var}{
+      border-radius: $parm;
+      padding: 12px;
+    }
+  }
+
+  @each $var in (primary,success, warning, info,danger) {
+    $parm:$primary;
+    // #{}引用变量
+    &#{&}-#{$var} {
+      @if $var == primary {
+        $parm: $primary;
+      }
+      @if $var == success {
+        $parm:  $success;
+      }
+      @if $var == warning {
+        $parm: $warning;
+      }
+      @if $var == info {
+        $parm: $info;
+      }
+      @if $var == danger {
+        $parm: $danger;
+      }
+      background-color: $parm;
+      border-color: $parm;
+      color: #FFFF;
+      &.is-plain{
+        @include plain($parm)
+      }
+      &:not(.is-disabled):active {
+        @include active($parm)
+      }
+    }
   }
 }

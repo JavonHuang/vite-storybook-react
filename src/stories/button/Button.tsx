@@ -1,48 +1,48 @@
 import React from 'react';
 import './button.scss';
+import classNames from 'classnames'
+import { tuple } from '../utils/type';
+import { ConfigContext } from '../configContext';
 
+export const ClsTypes = tuple('primary', 'success', 'warning', 'info','danger');
+export type ClsType = typeof ClsTypes[number];
 interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
-  label: string;
+  children?: React.ReactNode;
+  type?:ClsType;
+  round?: boolean;
+  plain?: boolean;
+  circle?: boolean;
+  disabled?:boolean;
+  style?: React.CSSProperties;
   /**
    * Optional click handler
    */
-  onClick?: () => void;
+  onClick?:React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 /**
- * Primary UI component for user interaction
+ * 基础用法
  */
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
-  ...props
-}: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export const Button: React.FC<ButtonProps> = (props) => {
+  const { getPrefix } = React.useContext(ConfigContext);
+  const prefixCls = getPrefix();
+  const classes = classNames(
+    [`${prefixCls}-button`,`${prefixCls}-button-${props.type}`].join(' '),
+    {
+      [`is-round`]: props.round,
+      [`is-plain`]: props.plain,
+      [`is-circle`]: props.circle,
+      [`is-disabled`]:props.disabled,
+    },
+  );
   return (
     <button
       type="button"
-      className={['button-ripple','storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
+      className={classes}
+      onClick={props.onClick}
+      style={ props.style}
     >
-      {label}
+      {props.children}
     </button>
   );
 };

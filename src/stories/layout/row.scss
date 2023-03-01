@@ -1,0 +1,11 @@
+@charset "UTF-8";
+@import "./../style/function.scss";
+@import "./../style/globalVar.scss";
+
+.#{$prefix}-row {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}

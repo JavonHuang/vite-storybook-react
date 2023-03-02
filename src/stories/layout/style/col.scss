@@ -1,0 +1,51 @@
+@charset "UTF-8";
+@use 'sass:math';
+@import "./../../style/function.scss";
+@import "./../../style/globalVar.scss";
+@import "./mixins.scss";
+
+[class*=#{$prefix}-col-] {
+  float: left;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.#{$prefix}-col {
+  @for $i from 0 through 24 {
+    &#{&}-#{$i} { 
+      max-width: (math.div(1, 24) * $i * 100) * 1%;
+      flex: 0 0 (math.div(1, 24) * $i * 100) * 1%;
+    }
+    &#{&}-offset-#{$i} { 
+      margin-left:(math.div(1, 24) * $i * 100) * 1%;
+    }
+    &#{&}-pull-#{$i} { 
+      position: relative;
+      right:(math.div(1, 24) * $i * 100) * 1%;
+    }
+    &#{&}-push-#{$i} { 
+      position: relative;
+      left:(math.div(1, 24) * $i * 100) * 1%;
+    }
+  }
+}
+
+@include col-size(xs);
+
+@include col-size(sm);
+
+@include col-size(md);
+
+@include col-size(lg);
+
+@include col-size(xl);
+
+.hidden {
+  @each $break-point-name, $value in $breakpoints-spec {
+    &-#{$break-point-name} {
+      @include res($break-point-name, $breakpoints-spec) {
+        display: none !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "3926704",
+  "name": "react-torybook-vite",
+  "font_family": "iconfont",
+  "css_prefix_text": "er-icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "109756",
+      "name": "loading",
+      "font_class": "loading",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    }
+  ]
+}

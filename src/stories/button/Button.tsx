@@ -3,6 +3,8 @@ import './button.scss';
 import classNames from 'classnames'
 import { tuple } from '../utils/type';
 import { ConfigContext } from '../configContext';
+import './../iconfont/iconfont.css';
+import './../style/common.scss'
 
 export const ClsTypes = tuple('primary', 'success', 'warning', 'info','danger');
 export type ClsType = typeof ClsTypes[number];
@@ -14,6 +16,8 @@ interface ButtonProps {
   circle?: boolean;
   disabled?:boolean;
   style?: React.CSSProperties;
+  loadingIcon?: String;
+  loading?: boolean;
   /**
    * Optional click handler
    */
@@ -24,6 +28,7 @@ interface ButtonProps {
  * 基础用法
  */
 export const Button: React.FC<ButtonProps> = (props) => {
+  const { loadingIcon = "er-icon-loading",loading=false } = props;
   const { getPrefix } = React.useContext(ConfigContext);
   const prefixCls = getPrefix();
   const classes = classNames(
@@ -42,7 +47,12 @@ export const Button: React.FC<ButtonProps> = (props) => {
       onClick={props.onClick}
       style={ props.style}
     >
+      {
+        loading && <i className={['iconfont', 'er-icon','is-loading',loadingIcon].join(' ')}></i>
+      }
+      <span>
       {props.children}
+      </span>
     </button>
   );
 };

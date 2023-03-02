@@ -9,6 +9,13 @@
   outline: none;
 }
 
+@mixin hover($color){
+  background:brandColorMix($color,30%);
+  border-color:brandColorMix($color,30%);
+  color: #fff;
+  outline: none;
+}
+
 @mixin plain($color){
   color:brandColorMix($color,10%);
   background:brandColorMix($color,90%);
@@ -36,6 +43,9 @@
   border-radius: 4px;
   &+&{
     margin-left: 10px;
+  }
+  [class*=#{$prefix}-icon]+span {
+      margin-left: 6px;
   }
   &:not(.is-disabled):active {
     @include active($primary)
@@ -83,6 +93,9 @@
       color: #FFFF;
       &.is-plain{
         @include plain($parm)
+      }
+      &:not(.is-disabled):hover {
+        @include hover($parm)
       }
       &:not(.is-disabled):active {
         @include active($parm)

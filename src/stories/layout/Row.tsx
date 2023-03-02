@@ -3,7 +3,7 @@ import React from "react";
 import { ConfigContext } from "../configContext";
 import RowContext from './RowContext';
 import { tuple } from "../utils/type";
-import './Row.scss';
+import './style/Row.scss';
 
 
 const RowAligns = tuple('top', 'middle', 'bottom');

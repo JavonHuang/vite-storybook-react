@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 
-const Template: ComponentStory<typeof Input> = (args) => <Input {...args}>默认</Input>;
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args}/>;
 
 export const input = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
 
 import { Input } from './input';
 
@@ -9,9 +10,9 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 
-const Template: ComponentStory<typeof Input> = (args) => <Input {...args}/>;
+const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
 
-export const input = Template.bind({});
+export const base = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-input.args = {
+base.args = {
 };

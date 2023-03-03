@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "12099685",
+      "name": "显示，眼睛，查看",
+      "font_class": "huabanfuben",
+      "unicode": "eb7e",
+      "unicode_decimal": 60286
+    },
+    {
+      "icon_id": "26677213",
+      "name": "CloseCircleOutlined",
+      "font_class": "qingchu",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
       "icon_id": "109756",
       "name": "loading",
       "font_class": "loading",

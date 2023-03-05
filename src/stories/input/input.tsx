@@ -13,6 +13,8 @@ export interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   disabled?: boolean,
   clearable?: boolean,
   showPassword?:boolean,
+  prefixIcon?:String,
+  suffixIcon?:String,
 }
 export const Input: React.FC<InputProps> = (props) => { 
   const { showPassword, ...rest } = props;
@@ -81,6 +83,26 @@ export const Input: React.FC<InputProps> = (props) => {
   const handleShowPassword = (e: React.MouseEvent<HTMLElement, MouseEvent>) => { 
     setisPassword(!isPassword);
   }
+
+  const renderSuffix=()=>{
+    if(!props.clearable && !showPassword && !props.suffixIcon){
+      return;
+    }
+    return  <span className={[`${prefixCls}-input-suffix-inner`].join(' ')}>
+      {props.suffixIcon && <i onClick={handleShowPassword} className={ ['iconfont', `${prefixCls}-input-icon`,`${props.suffixIcon}`,].join(' ')}></i>}
+      {showPassword && <i onClick={handleShowPassword} className={ ['iconfont', `${prefixCls}-input-icon`,`${prefixCls}-icon-huabanfuben`,].join(' ')}></i>}
+      {props.clearable &&
+        value && 
+        <i onClick={handleClear}
+          className={[
+            'iconfont', `${prefixCls}-input-icon`,
+            'is-clear',
+            `${prefixCls}-icon-qingchu`,
+            focused && value ? 'is-focused' : '',
+            hovered && value ? 'is-hover' : ''].join(' ')}>
+        </i>}
+    </span>
+  }
   return <div className={classesParent} onMouseEnter ={handleMouseEnter} onMouseLeave ={handleMouseleave}>
     <input
       {...rest}
@@ -91,18 +113,6 @@ export const Input: React.FC<InputProps> = (props) => {
       onFocus={handleFocus}
       onBlur={handleBlur}
       onChange={handleChange} />
-    <span className={[`${prefixCls}-input-suffix-inner`].join(' ')}>
-      {props.clearable &&
-        value && !showPassword &&
-        <i onClick={handleClear}
-          className={[
-            'iconfont', `${prefixCls}-input-icon`,
-            'is-clear',
-            `${prefixCls}-icon-qingchu`,
-            focused && value ? 'is-focused' : '',
-            hovered && value ? 'is-hover' : ''].join(' ')}>
-        </i>}
-      {showPassword && <i onClick={handleShowPassword} className={ ['iconfont', `${prefixCls}-input-icon`,`${prefixCls}-icon-huabanfuben`,].join(' ')}></i>}
-    </span>
+      {renderSuffix()}
   </div>
 }

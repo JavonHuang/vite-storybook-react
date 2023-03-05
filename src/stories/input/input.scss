@@ -40,6 +40,7 @@
     display: none;
   }
   #{$parent}-icon{
+    width: 25px;
     line-height: 40px;
     text-align: center;
     cursor: pointer;
@@ -49,6 +50,7 @@
     }
   }
   #{$parent}-suffix-inner{
+    display: flex;
     position: absolute;
     height: 100%;
     right: 5px;
